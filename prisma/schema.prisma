@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  username        String
+  email           String   @unique
+  password        String
+  height          Int
+  weight          Int
+  bodyFat         Int
+  goalWeight      Int      @map("goal_weight")
+  goalBodyFat     Int      @map("goal_body_fat")
+  calorieIntake   Int      @map("calorie_intake")
+  
+  workouts        Workout[]
+  @@map("users")
+}
+
+model Workout {
+  id            String     @id @default(cuid())
+  name          String
+  date          DateTime
+
+  user          User       @relation(fields: [userId], references: [id])
+  userId        String     @map("user_id")
+
+  workoutExercise      WorkoutExercise[]
+  @@map("workouts")
+}
+
+model WorkoutExercise {
+  id                String      @id @default(cuid())
+
+  workout           Workout     @relation(fields: [workoutId], references: [id])
+  workoutId         String      @map("workout_id")
+
+  exercise          Exercise    @relation(fields: [exerciseId], references: [id])
+  exerciseId        String      @map("exercise_id")
+
+  workoutExerciseSet WorkoutExerciseSet[]
+  @@map("workouts_exercises")
+}
+
+model WorkoutExerciseSet{
+  id                String      @id @default(cuid())   ///asta nu era
+  reps              Int
+  weight            Int
+
+  workoutExerciseId String   @map("workout_exercise_id")  ///aici era @unqiue
+  workoutExercise   WorkoutExercise @relation(fields: [workoutExerciseId], references: [id])
+  @@map("workouts_exercises_sets")
+}
+
+model Exercise {
+  id                  String   @id @default(cuid())
+  name                String
+  image               String
+  difficulty          String
+  demonstrationGif    String   @map("demonstration_gif")
+  description         String
+  type                String
+
+  workoutExercise     WorkoutExercise[]
+
+  exerciseMuscle      ExerciseMuscle[]
+  @@map("exercises")
+}
+
+model ExerciseMuscle {
+  exercise        Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId      String   @map("exercise_id")
+
+  muscle          Muscle   @relation(fields: [muscleId], references: [id])
+  muscleId        String   @map("muscle_id")
+
+  @@id([exerciseId, muscleId])
+  @@map("exercises_muscles")
+}
+
+model Muscle {
+  id                String      @id @default(cuid())
+  name              String
+  muscleImg         String      @map("muscle_img")
+  information       String
+
+  exerciseMuscle    ExerciseMuscle[]
+  @@map("muscles")
+}
+
