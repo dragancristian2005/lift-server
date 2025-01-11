@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { createHash } from 'crypto';
 const prisma = new PrismaClient();
 
 async function main() {
@@ -8,7 +9,7 @@ async function main() {
     create: {
       username: 'cristi',
       email: 'cristi@test.com',
-      password: 'password123',
+      password: createHash('sha256').update('password123').digest('base64'),
       height: 176,
       weight: 75,
       bodyFat: 19,
@@ -24,7 +25,7 @@ async function main() {
     create: {
       username: 'damian',
       email: 'damian@test.com',
-      password: 'password123',
+      password: createHash('sha256').update('password123').digest('base64'),
       height: 190,
       weight: 95,
       bodyFat: 15,
@@ -38,6 +39,7 @@ async function main() {
     where: { id: 'cm5p64zjl000008jy91fygcph' },
     update: {},
     create: {
+      id: 'cm5p64zjl000008jy91fygcph',
       name: 'Chest Killer',
       date: new Date(),
       userId: cristi.id,
@@ -45,9 +47,10 @@ async function main() {
   });
 
   const bicepKiller = await prisma.workout.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9w7nw000008jy1nng72ko' },
     update: {},
     create: {
+      id: 'cm5s9w7nw000008jy1nng72ko',
       name: 'Bicep Killer',
       date: new Date(),
       userId: damian.id,
@@ -55,9 +58,10 @@ async function main() {
   });
 
   const chest = await prisma.muscle.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9wnub000208jy66im1qp9' },
     update: {},
     create: {
+      id: 'cm5s9wnub000208jy66im1qp9',
       name: 'Chest',
       muscleImg:
         'https://aminoco.com/cdn/shop/articles/FeaturedImage_PulledChestMuscle.jpg?v=1592870496',
@@ -67,9 +71,10 @@ async function main() {
   });
 
   const biceps = await prisma.muscle.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9wxe3000308jyhn7r0ez7' },
     update: {},
     create: {
+      id: 'cm5s9wxe3000308jyhn7r0ez7',
       name: 'Biceps',
       muscleImg:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpe3T3zUiAGsM0l7tu6s0su_bbHTLOitKveA&s',
@@ -79,9 +84,10 @@ async function main() {
   });
 
   const forearms = await prisma.muscle.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9x8rx000008jyanpl09ek' },
     update: {},
     create: {
+      id: 'cm5s9x8rx000008jyanpl09ek',
       name: 'Forearms',
       muscleImg:
         'https://lh6.googleusercontent.com/proxy/27qO6ZGA6JZ-Rwb7WJPtEB6-F39LpQqJRu6Cz6HFQlBQ9KdOMMlj6JRH8J6upE_dVyxZnqvNyRCDdNkQ9AP5MLtUitaTXwahZ7Wt9EpVPZT2Za7E1UeD9UNJuBBi1MGvPzLqDO2VftIwHOjT8_Fn9ekj4ZSdBFasMwi6CN6u',
@@ -91,9 +97,10 @@ async function main() {
   });
 
   const frontDelts = await prisma.muscle.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9xgdb000108jycla5fo1j' },
     update: {},
     create: {
+      id: 'cm5s9xgdb000108jycla5fo1j',
       name: 'Front Delts',
       muscleImg:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQjpo9nNCaGjmBvkSutaN2Qc0-Y8V-taHbKw&s',
@@ -103,9 +110,10 @@ async function main() {
   });
 
   const triceps = await prisma.muscle.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9xn7b000208jyfv7neimh' },
     update: {},
     create: {
+      id: 'cm5s9xn7b000208jyfv7neimh',
       name: 'Triceps',
       muscleImg:
         'https://i.shgcdn.com/c39f9e9e-8e0a-4fa9-9ead-7ab7c3415c9d/-/format/auto/-/preview/3000x3000/-/quality/lighter/',
@@ -115,9 +123,10 @@ async function main() {
   });
 
   const benchPress = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9y0jd000308jygp03c5z7' },
     update: {},
     create: {
+      id: 'cm5s9y0jd000308jygp03c5z7',
       name: 'Bench Press',
       image:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfwagKnFx63uxxAI_rPgYBQIsFE3EFnfa4wQ&s',
@@ -131,9 +140,10 @@ async function main() {
   });
 
   const inclineBenchPress = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9y7qj000408jyb4b3fmz5' },
     update: {},
     create: {
+      id: 'cm5s9y7qj000408jyb4b3fmz5',
       name: 'Incline Bench Press',
       image:
         'https://image.myupchar.com/9694/webp/incline-bench-press-benefits-types-technique.webp',
@@ -147,9 +157,10 @@ async function main() {
   });
 
   const cableFly = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9ye4j000508jy8x5bc4b0' },
     update: {},
     create: {
+      id: 'cm5s9ye4j000508jy8x5bc4b0',
       name: 'Cable Fly',
       image:
         'https://cdn-0.weighttraining.guide/wp-content/uploads/2016/05/cable-cross-over-resized.png?ezimgfmt=ng%3Awebp%2Fngcb4',
@@ -163,9 +174,10 @@ async function main() {
   });
 
   const declineBenchPress = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9ypzi000608jy0g953rfu' },
     update: {},
     create: {
+      id: 'cm5s9ypzi000608jy0g953rfu',
       name: 'Decline Bench Press',
       image:
         'https://cdn.shopify.com/s/files/1/0252/3155/6686/files/How_to_do_Decline_Bench_Press_1.jpg?v=1721223035',
@@ -178,9 +190,10 @@ async function main() {
   });
 
   const bicepCurl = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9yz46000708jybq8n02i0' },
     update: {},
     create: {
+      id: 'cm5s9yz46000708jybq8n02i0',
       name: 'Bicep Curls',
       image:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVjwtbfTZ9oBZ7qIVUcGeJS-2tMcaufuNdw&s',
@@ -193,9 +206,10 @@ async function main() {
   });
 
   const hammerCurl = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9z5h5000808jy6nbsfz95' },
     update: {},
     create: {
+      id: 'cm5s9z5h5000808jy6nbsfz95',
       name: 'Hammer Curls',
       image:
         'https://cdn.shopify.com/s/files/1/1876/4703/files/shutterstock_419477203_480x480.jpg?v=1636560233',
@@ -209,9 +223,10 @@ async function main() {
   });
 
   const ezBarCurl = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9zd67000908jy604casvi' },
     update: {},
     create: {
+      id: 'cm5s9zd67000908jy604casvi',
       name: 'EZ Bar Curls',
       image:
         'https://cdn-0.weighttraining.guide/wp-content/uploads/2016/10/EZ-Barbell-Curl-resized.png?ezimgfmt=ng%3Awebp%2Fngcb4',
@@ -224,9 +239,10 @@ async function main() {
   });
 
   const preacherCurl = await prisma.exercise.upsert({
-    where: { id: 'cm5p64zjl000008jy91fygcph' },
+    where: { id: 'cm5s9zkn0000a08jy1r0d11iu' },
     update: {},
     create: {
+      id: 'cm5s9zkn0000a08jy1r0d11iu',
       name: 'Preacher Curls',
       image:
         'https://www.kettlebellkings.com/cdn/shop/articles/Preacher_Curl_Alternatives.png?v=1731324163',
@@ -239,354 +255,442 @@ async function main() {
     },
   });
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: cableFly.id,
-        muscleId: chest.id,
-      },
-      {
-        exerciseId: cableFly.id,
-        muscleId: frontDelts.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({ where: { exerciseId: cableFly.id } }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: cableFly.id,
+          muscleId: chest.id,
+        },
+        {
+          exerciseId: cableFly.id,
+          muscleId: frontDelts.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: inclineBenchPress.id,
-        muscleId: chest.id,
-      },
-      {
-        exerciseId: inclineBenchPress.id,
-        muscleId: frontDelts.id,
-      },
-      {
-        exerciseId: inclineBenchPress.id,
-        muscleId: triceps.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: inclineBenchPress.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: inclineBenchPress.id,
+          muscleId: chest.id,
+        },
+        {
+          exerciseId: inclineBenchPress.id,
+          muscleId: frontDelts.id,
+        },
+        {
+          exerciseId: inclineBenchPress.id,
+          muscleId: triceps.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: benchPress.id,
-        muscleId: chest.id,
-      },
-      {
-        exerciseId: benchPress.id,
-        muscleId: frontDelts.id,
-      },
-      {
-        exerciseId: benchPress.id,
-        muscleId: triceps.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: benchPress.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: benchPress.id,
+          muscleId: chest.id,
+        },
+        {
+          exerciseId: benchPress.id,
+          muscleId: frontDelts.id,
+        },
+        {
+          exerciseId: benchPress.id,
+          muscleId: triceps.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: declineBenchPress.id,
-        muscleId: chest.id,
-      },
-      {
-        exerciseId: declineBenchPress.id,
-        muscleId: frontDelts.id,
-      },
-      {
-        exerciseId: declineBenchPress.id,
-        muscleId: triceps.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: declineBenchPress.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: declineBenchPress.id,
+          muscleId: chest.id,
+        },
+        {
+          exerciseId: declineBenchPress.id,
+          muscleId: frontDelts.id,
+        },
+        {
+          exerciseId: declineBenchPress.id,
+          muscleId: triceps.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: bicepCurl.id,
-        muscleId: biceps.id,
-      },
-      {
-        exerciseId: bicepCurl.id,
-        muscleId: forearms.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: bicepCurl.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: bicepCurl.id,
+          muscleId: biceps.id,
+        },
+        {
+          exerciseId: bicepCurl.id,
+          muscleId: forearms.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: hammerCurl.id,
-        muscleId: biceps.id,
-      },
-      {
-        exerciseId: hammerCurl.id,
-        muscleId: forearms.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: hammerCurl.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: hammerCurl.id,
+          muscleId: biceps.id,
+        },
+        {
+          exerciseId: hammerCurl.id,
+          muscleId: forearms.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: ezBarCurl.id,
-        muscleId: biceps.id,
-      },
-      {
-        exerciseId: ezBarCurl.id,
-        muscleId: forearms.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: ezBarCurl.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: ezBarCurl.id,
+          muscleId: biceps.id,
+        },
+        {
+          exerciseId: ezBarCurl.id,
+          muscleId: forearms.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.exerciseMuscle.createMany({
-    data: [
-      {
-        exerciseId: preacherCurl.id,
-        muscleId: biceps.id,
-      },
-      {
-        exerciseId: preacherCurl.id,
-        muscleId: forearms.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: preacherCurl.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: preacherCurl.id,
+          muscleId: biceps.id,
+        },
+        {
+          exerciseId: preacherCurl.id,
+          muscleId: forearms.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.workoutExercise.createMany({
-    data: [
-      {
-        workoutId: bicepKiller.id,
-        exerciseId: bicepCurl.id,
-      },
-      {
-        workoutId: bicepKiller.id,
-        exerciseId: hammerCurl.id,
-      },
-      {
-        workoutId: bicepKiller.id,
-        exerciseId: ezBarCurl.id,
-      },
-      {
-        workoutId: bicepKiller.id,
-        exerciseId: preacherCurl.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.workoutExercise.deleteMany({
+      where: { workoutId: bicepKiller.id },
+    }),
+    prisma.workoutExercise.createMany({
+      data: [
+        {
+          id: 'cm5sb2gda000408me5ipnb6fv',
+          workoutId: bicepKiller.id,
+          exerciseId: bicepCurl.id,
+        },
+        {
+          id: 'cm5sb2lm1000508me5jcx2zy5',
+          workoutId: bicepKiller.id,
+          exerciseId: hammerCurl.id,
+        },
+        {
+          id: 'cm5sb2rhz000608me1q2k8ky8',
+          workoutId: bicepKiller.id,
+          exerciseId: ezBarCurl.id,
+        },
+        {
+          id: 'cm5sb2zcf000708me6f810cfq',
+          workoutId: bicepKiller.id,
+          exerciseId: preacherCurl.id,
+        },
+      ],
+    }),
+  ]);
 
-  await prisma.workoutExercise.createMany({
-    data: [
-      {
-        workoutId: chestKiller.id,
-        exerciseId: benchPress.id,
-      },
-      {
-        workoutId: chestKiller.id,
-        exerciseId: inclineBenchPress.id,
-      },
-      {
-        workoutId: chestKiller.id,
-        exerciseId: cableFly.id,
-      },
-      {
-        workoutId: chestKiller.id,
-        exerciseId: declineBenchPress.id,
-      },
-    ],
-  });
+  await prisma.$transaction([
+    prisma.workoutExercise.deleteMany({
+      where: { workoutId: chestKiller.id },
+    }),
+    prisma.workoutExercise.createMany({
+      data: [
+        {
+          id: 'cm5sazwkm000008jl36x4gr7e',
+          workoutId: chestKiller.id,
+          exerciseId: benchPress.id,
+        },
+        {
+          id: 'cm5sb12eo000008megywx63of',
+          workoutId: chestKiller.id,
+          exerciseId: inclineBenchPress.id,
+        },
+        {
+          id: 'cm5sb158m000108medq3q6n1r',
+          workoutId: chestKiller.id,
+          exerciseId: cableFly.id,
+        },
+        {
+          id: 'cm5sb1hto000208me4bkdh9nw',
+          workoutId: chestKiller.id,
+          exerciseId: declineBenchPress.id,
+        },
+      ],
+    }),
+  ]);
 
-  const createdChestKillerExercises = await prisma.workoutExercise.findMany({
-    where: {
-      workoutId: chestKiller.id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sazwkm000008jl36x4gr7e' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
+      },
     },
   });
 
-  const createdBicepKillerExercises = await prisma.workoutExercise.findMany({
-    where: {
-      workoutId: bicepKiller.id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sb12eo000008megywx63of' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
+      },
     },
   });
 
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 25,
-        workoutExerciseId: createdChestKillerExercises[0].id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sb158m000108medq3q6n1r' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
       },
-      {
-        reps: 10,
-        weight: 30,
-        workoutExerciseId: createdChestKillerExercises[0].id,
-      },
-      {
-        reps: 8,
-        weight: 32,
-        workoutExerciseId: createdChestKillerExercises[0].id,
-      },
-      {
-        reps: 8,
-        weight: 32,
-        workoutExerciseId: createdChestKillerExercises[0].id,
-      },
-    ],
+    },
   });
 
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 25,
-        workoutExerciseId: createdChestKillerExercises[1].id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sb1hto000208me4bkdh9nw' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
       },
-      {
-        reps: 10,
-        weight: 30,
-        workoutExerciseId: createdChestKillerExercises[1].id,
-      },
-      {
-        reps: 8,
-        weight: 32,
-        workoutExerciseId: createdChestKillerExercises[1].id,
-      },
-      {
-        reps: 8,
-        weight: 32,
-        workoutExerciseId: createdChestKillerExercises[1].id,
-      },
-    ],
+    },
   });
 
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 15,
-        workoutExerciseId: createdChestKillerExercises[2].id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sb2gda000408me5ipnb6fv' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
       },
-      {
-        reps: 10,
-        weight: 17,
-        workoutExerciseId: createdChestKillerExercises[2].id,
-      },
-      {
-        reps: 8,
-        weight: 20,
-        workoutExerciseId: createdChestKillerExercises[2].id,
-      },
-      {
-        reps: 8,
-        weight: 20,
-        workoutExerciseId: createdChestKillerExercises[2].id,
-      },
-    ],
+    },
   });
 
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 20,
-        workoutExerciseId: createdChestKillerExercises[3].id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sb2lm1000508me5jcx2zy5' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
       },
-      {
-        reps: 10,
-        weight: 22,
-        workoutExerciseId: createdChestKillerExercises[3].id,
-      },
-      {
-        reps: 8,
-        weight: 25,
-        workoutExerciseId: createdChestKillerExercises[3].id,
-      },
-      {
-        reps: 8,
-        weight: 25,
-        workoutExerciseId: createdChestKillerExercises[3].id,
-      },
-    ],
+    },
   });
 
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 12,
-        workoutExerciseId: createdBicepKillerExercises[0].id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sb2rhz000608me1q2k8ky8' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
       },
-      {
-        reps: 10,
-        weight: 15,
-        workoutExerciseId: createdBicepKillerExercises[0].id,
-      },
-      {
-        reps: 8,
-        weight: 17,
-        workoutExerciseId: createdBicepKillerExercises[0].id,
-      },
-    ],
+    },
   });
 
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 12,
-        workoutExerciseId: createdBicepKillerExercises[1].id,
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5sb2zcf000708me6f810cfq' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
       },
-      {
-        reps: 10,
-        weight: 15,
-        workoutExerciseId: createdBicepKillerExercises[1].id,
-      },
-      {
-        reps: 8,
-        weight: 17,
-        workoutExerciseId: createdBicepKillerExercises[1].id,
-      },
-    ],
-  });
-
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 20,
-        workoutExerciseId: createdBicepKillerExercises[2].id,
-      },
-      {
-        reps: 10,
-        weight: 25,
-        workoutExerciseId: createdBicepKillerExercises[2].id,
-      },
-      {
-        reps: 8,
-        weight: 27,
-        workoutExerciseId: createdBicepKillerExercises[2].id,
-      },
-    ],
-  });
-
-  await prisma.workoutExerciseSet.createMany({
-    data: [
-      {
-        reps: 12,
-        weight: 17,
-        workoutExerciseId: createdBicepKillerExercises[3].id,
-      },
-      {
-        reps: 10,
-        weight: 20,
-        workoutExerciseId: createdBicepKillerExercises[3].id,
-      },
-      {
-        reps: 8,
-        weight: 22,
-        workoutExerciseId: createdBicepKillerExercises[3].id,
-      },
-    ],
+    },
   });
 }
 
