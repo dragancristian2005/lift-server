@@ -11,4 +11,8 @@ export class UsersService {
       where: userWhere,
     });
   }
+
+  async getAllUsers() {
+    return this.prismaService.user.findMany();
+  }
 }

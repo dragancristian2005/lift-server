@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class MusclesService {
   constructor(private prismaService: PrismaService) {}
 
-  async getMuscles() {
+  async getAllMuscles() {
     return this.prismaService.muscle.findMany();
   }
 }
