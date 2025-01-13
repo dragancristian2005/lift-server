@@ -12,7 +12,17 @@ export class UsersService {
     });
   }
 
-  async getAllUsers() {
-    return this.prismaService.user.findMany();
+  async getAllUsers(page: number, limit: number) {
+    const skip = (page - 1) * limit;
+    const take = limit;
+
+    return this.prismaService.user.findMany({
+      skip,
+      take,
+    });
+  }
+
+  async getOneUser(userId: string) {
+    return this.prismaService.user.findUnique({ where: { id: userId } });
   }
 }

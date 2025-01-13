@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateExercisesMuscleDto } from './dto/create-exercises_muscle.dto';
-import { UpdateExercisesMuscleDto } from './dto/update-exercises_muscle.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()

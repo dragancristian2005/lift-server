@@ -10,7 +10,16 @@ import { WorkoutsExercisesModule } from './workouts-exercises/workouts-exercises
 import { WorkoutsExercisesSetsModule } from './workouts-exercises-sets/workouts-exercises-sets.module';
 
 @Module({
-  imports: [MusclesModule, AuthModule, UsersModule, ExercisesModule, ExercisesMusclesModule, WorkoutsModule, WorkoutsExercisesModule, WorkoutsExercisesSetsModule],
+  imports: [
+    MusclesModule,
+    AuthModule,
+    UsersModule,
+    ExercisesModule,
+    ExercisesMusclesModule,
+    WorkoutsModule,
+    WorkoutsExercisesModule,
+    WorkoutsExercisesSetsModule,
+  ],
   controllers: [AppController],
 })
 export class AppModule {}
