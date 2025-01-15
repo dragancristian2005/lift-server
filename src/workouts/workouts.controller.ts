@@ -14,4 +14,9 @@ export class WorkoutsController {
   getOneWorkout(@Param('id') workoutId: string) {
     return this.workoutsService.getOneWorkout(workoutId);
   }
+
+  @Get(':userId/weekly-progress')
+  getWeeklyProgress(@Param('userId') userId: string) {
+    return this.workoutsService.getWeeklyProgress(userId);
+  }
 }

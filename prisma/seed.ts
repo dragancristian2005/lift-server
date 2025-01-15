@@ -57,6 +57,17 @@ async function main() {
     },
   });
 
+  const tricepsKiller = await prisma.workout.upsert({
+    where: { id: 'cm5y3od9m000008med5jt2e8j' },
+    update: {},
+    create: {
+      id: 'cm5y3od9m000008med5jt2e8j',
+      name: 'Triceps Killer',
+      date: new Date(),
+      userId: cristi.id,
+    },
+  });
+
   const chest = await prisma.muscle.upsert({
     where: { id: 'cm5s9wnub000208jy66im1qp9' },
     update: {},
@@ -254,6 +265,102 @@ async function main() {
       type: 'Strength',
     },
   });
+
+  const overheadTricepsExtensions = await prisma.exercise.upsert({
+    where: { id: 'cm5yhn55i000008l79gxv1q4r' },
+    update: {},
+    create: {
+      id: 'cm5yhn55i000008l79gxv1q4r',
+      name: 'Overhead Triceps Extensions',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIWdIzZpPFbjvYU7E_IqTcvKuqJtLrmlvwUA&s',
+      difficulty: 'Intermediate',
+      demonstrationGif:
+        'https://i.pinimg.com/originals/e1/64/bf/e164bfe4db5977f639c427cf40871b56.gif',
+      description:
+        'The overhead triceps extension is an effective exercise for targeting the triceps muscles, which are located on the back of the upper arm. This exercise involves extending the arms overhead while holding a weight, such as a dumbbell or a barbell, and then lowering the weight behind the head before extending the arms back to the starting position.',
+      type: 'Strength',
+    },
+  });
+
+  const skullCrushers = await prisma.exercise.upsert({
+    where: { id: 'cm5yhqnh1000208l7bw509a5s' },
+    update: {},
+    create: {
+      id: 'cm5yhqnh1000208l7bw509a5s',
+      name: 'Skull Crushers',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWKusz70M1CDNQOL-aoNKrWGXM_SjCWIxDRg&s',
+      difficulty: 'Intermediate',
+      demonstrationGif:
+        'https://media.tenor.com/ToAHkKHVQP4AAAAM/on-lying-triceps-al%C4%B1n-press.gif',
+      description:
+        'Skull crushers, also known as lying triceps extensions, are an effective exercise for targeting the triceps muscles, which are located on the back of the upper arm. This exercise involves lying on a bench and extending the arms while holding a weight, such as a barbell or dumbbells, and then lowering the weight towards the forehead before extending the arms back to the starting position ',
+      type: 'Strength',
+    },
+  });
+
+  const pushUps = await prisma.exercise.upsert({
+    where: { id: 'cm5yhx3gg000608l77p207xfm' },
+    update: {},
+    create: {
+      id: 'cm5yhx3gg000608l77p207xfm',
+      name: 'Push Ups',
+      image:
+        'https://kinxlearning.com/cdn/shop/files/Pushup_1400x.jpg?v=1705765225',
+      difficulty: 'Beginner',
+      demonstrationGif: 'https://gymvisual.com/img/p/1/0/0/8/3/10083.gif',
+      description:
+        'Push-ups are a fundamental bodyweight exercise that primarily targets the chest, shoulders, and triceps. They also engage the core and lower body muscles to a lesser extent.',
+      type: 'Strength',
+    },
+  });
+
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: overheadTricepsExtensions.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: overheadTricepsExtensions.id,
+          muscleId: triceps.id,
+        },
+      ],
+    }),
+  ]);
+
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: pushUps.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: pushUps.id,
+          muscleId: triceps.id,
+        },
+        {
+          exerciseId: pushUps.id,
+          muscleId: chest.id,
+        },
+      ],
+    }),
+  ]);
+
+  await prisma.$transaction([
+    prisma.exerciseMuscle.deleteMany({
+      where: { exerciseId: skullCrushers.id },
+    }),
+    prisma.exerciseMuscle.createMany({
+      data: [
+        {
+          exerciseId: skullCrushers.id,
+          muscleId: triceps.id,
+        },
+      ],
+    }),
+  ]);
 
   await prisma.$transaction([
     prisma.exerciseMuscle.deleteMany({ where: { exerciseId: cableFly.id } }),
@@ -469,6 +576,31 @@ async function main() {
     }),
   ]);
 
+  await prisma.$transaction([
+    prisma.workoutExercise.deleteMany({
+      where: { workoutId: tricepsKiller.id },
+    }),
+    prisma.workoutExercise.createMany({
+      data: [
+        {
+          id: 'cm5yhvtix000308l7hf5zafrz',
+          workoutId: tricepsKiller.id,
+          exerciseId: overheadTricepsExtensions.id,
+        },
+        {
+          id: 'cm5yhvya8000408l7ekjc0w40',
+          workoutId: tricepsKiller.id,
+          exerciseId: skullCrushers.id,
+        },
+        {
+          id: 'cm5yhw1sw000508l7cipsavn1',
+          workoutId: tricepsKiller.id,
+          exerciseId: pushUps.id,
+        },
+      ],
+    }),
+  ]);
+
   await prisma.workoutExercise.update({
     where: { id: 'cm5sazwkm000008jl36x4gr7e' },
     data: {
@@ -667,6 +799,90 @@ async function main() {
 
   await prisma.workoutExercise.update({
     where: { id: 'cm5sb2zcf000708me6f810cfq' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5yhvtix000308l7hf5zafrz' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5yhvya8000408l7ekjc0w40' },
+    data: {
+      workoutExerciseSet: {
+        createMany: {
+          data: [
+            {
+              reps: 12,
+              weight: 25,
+            },
+            {
+              reps: 10,
+              weight: 30,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+            {
+              reps: 8,
+              weight: 32,
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  await prisma.workoutExercise.update({
+    where: { id: 'cm5yhw1sw000508l7cipsavn1' },
     data: {
       workoutExerciseSet: {
         createMany: {
