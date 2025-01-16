@@ -81,12 +81,12 @@ async function main() {
     },
   });
 
-  const biceps = await prisma.muscle.upsert({
+  const bicepsBrachi = await prisma.muscle.upsert({
     where: { id: 'cm5s9wxe3000308jyhn7r0ez7' },
     update: {},
     create: {
       id: 'cm5s9wxe3000308jyhn7r0ez7',
-      name: 'Biceps',
+      name: 'Biceps Brachi',
       muscleImg:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpe3T3zUiAGsM0l7tu6s0su_bbHTLOitKveA&s',
       information:
@@ -94,25 +94,25 @@ async function main() {
     },
   });
 
-  const forearms = await prisma.muscle.upsert({
+  const brachioradialis = await prisma.muscle.upsert({
     where: { id: 'cm5s9x8rx000008jyanpl09ek' },
     update: {},
     create: {
       id: 'cm5s9x8rx000008jyanpl09ek',
-      name: 'Forearms',
+      name: 'Brachioradialis',
       muscleImg:
         'https://lh6.googleusercontent.com/proxy/27qO6ZGA6JZ-Rwb7WJPtEB6-F39LpQqJRu6Cz6HFQlBQ9KdOMMlj6JRH8J6upE_dVyxZnqvNyRCDdNkQ9AP5MLtUitaTXwahZ7Wt9EpVPZT2Za7E1UeD9UNJuBBi1MGvPzLqDO2VftIwHOjT8_Fn9ekj4ZSdBFasMwi6CN6u',
       information:
-        "The forearms are a muscle group that is located on the front of the lower arm. They are responsible for flexing the wrist and fingers, and they play a key role in grip strength and stability. The forearms are made up of several muscles, including the flexor carpi radialis, the flexor carpi ulnaris, and the palmaris longus. These muscles work together to move the wrist and fingers, and they play a key role in upper body strength and stability. When training the forearms, it's important to include a variety of exercises that target all of the",
+        "The brachioradialis are a muscle group that is located on the front of the lower arm. They are responsible for flexing the wrist and fingers, and they play a key role in grip strength and stability. The brachioradialis are made up of several muscles, including the flexor carpi radialis, the flexor carpi ulnaris, and the palmaris longus. These muscles work together to move the wrist and fingers, and they play a key role in upper body strength and stability. When training the brachioradialis, it's important to include a variety of exercises that target all of the",
     },
   });
 
-  const frontDelts = await prisma.muscle.upsert({
+  const deltoidsFront = await prisma.muscle.upsert({
     where: { id: 'cm5s9xgdb000108jycla5fo1j' },
     update: {},
     create: {
       id: 'cm5s9xgdb000108jycla5fo1j',
-      name: 'Front Delts',
+      name: 'Deltoids Front',
       muscleImg:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQjpo9nNCaGjmBvkSutaN2Qc0-Y8V-taHbKw&s',
       information:
@@ -228,7 +228,7 @@ async function main() {
       demonstrationGif:
         'https://fitnessprogramer.com/wp-content/uploads/2021/02/Hammer-Curl.gif',
       description:
-        "The hammer curl is a variation of the traditional bicep curl that targets the biceps muscles. It is performed by holding a pair of dumbbells with a neutral grip (palms facing each other) and curling the weights towards the shoulders. This exercise is great for building strength and size in the biceps, forearms, and brachialis. It can also help to improve grip strength and reduce the risk of injury. When performing the hammer curl, it's important to use proper form and technique to ensure that you are targeting the intended muscles and getting the most out of the exercise.",
+        "The hammer curl is a variation of the traditional bicep curl that targets the biceps muscles. It is performed by holding a pair of dumbbells with a neutral grip (palms facing each other) and curling the weights towards the shoulders. This exercise is great for building strength and size in the biceps, brachioradialis, and brachialis. It can also help to improve grip strength and reduce the risk of injury. When performing the hammer curl, it's important to use proper form and technique to ensure that you are targeting the intended muscles and getting the most out of the exercise.",
       type: 'Strength',
     },
   });
@@ -244,7 +244,7 @@ async function main() {
       difficulty: 'Beginner',
       demonstrationGif: 'https://gymvisual.com/img/p/5/1/8/8/5188.gif',
       description:
-        "The EZ bar curl is a variation of the traditional bicep curl that targets the biceps muscles. It is performed by holding an EZ bar with a shoulder-width grip and curling the weight towards the shoulders. This exercise is great for building strength and size in the biceps, forearms, and brachialis. It can also help to improve grip strength and reduce the risk of injury. When performing the EZ bar curl, it's important to use proper form and technique to ensure that you are targeting the intended muscles and getting the most out of the exercise.",
+        "The EZ bar curl is a variation of the traditional bicep curl that targets the biceps muscles. It is performed by holding an EZ bar with a shoulder-width grip and curling the weight towards the shoulders. This exercise is great for building strength and size in the biceps, brachioradialis, and brachialis. It can also help to improve grip strength and reduce the risk of injury. When performing the EZ bar curl, it's important to use proper form and technique to ensure that you are targeting the intended muscles and getting the most out of the exercise.",
       type: 'Strength',
     },
   });
@@ -261,7 +261,7 @@ async function main() {
       demonstrationGif:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiP7Z7AI48VPxSR_iCcEGP65ZDn22HNf7y5w&s',
       description:
-        "The preacher curl is a variation of the traditional bicep curl that targets the biceps muscles. It is performed by sitting on a preacher bench and curling the weight towards the shoulders. This exercise is great for building strength and size in the biceps, forearms, and brachialis. It can also help to improve grip strength and reduce the risk of injury. When performing the preacher curl, it's important to use proper form and technique to ensure that you are targeting the intended muscles and getting the most out of the exercise.",
+        "The preacher curl is a variation of the traditional bicep curl that targets the biceps muscles. It is performed by sitting on a preacher bench and curling the weight towards the shoulders. This exercise is great for building strength and size in the biceps, brachioradialis, and brachialis. It can also help to improve grip strength and reduce the risk of injury. When performing the preacher curl, it's important to use proper form and technique to ensure that you are targeting the intended muscles and getting the most out of the exercise.",
       type: 'Strength',
     },
   });
@@ -372,7 +372,7 @@ async function main() {
         },
         {
           exerciseId: cableFly.id,
-          muscleId: frontDelts.id,
+          muscleId: deltoidsFront.id,
         },
       ],
     }),
@@ -390,7 +390,7 @@ async function main() {
         },
         {
           exerciseId: inclineBenchPress.id,
-          muscleId: frontDelts.id,
+          muscleId: deltoidsFront.id,
         },
         {
           exerciseId: inclineBenchPress.id,
@@ -412,7 +412,7 @@ async function main() {
         },
         {
           exerciseId: benchPress.id,
-          muscleId: frontDelts.id,
+          muscleId: deltoidsFront.id,
         },
         {
           exerciseId: benchPress.id,
@@ -434,7 +434,7 @@ async function main() {
         },
         {
           exerciseId: declineBenchPress.id,
-          muscleId: frontDelts.id,
+          muscleId: deltoidsFront.id,
         },
         {
           exerciseId: declineBenchPress.id,
@@ -452,11 +452,11 @@ async function main() {
       data: [
         {
           exerciseId: bicepCurl.id,
-          muscleId: biceps.id,
+          muscleId: bicepsBrachi.id,
         },
         {
           exerciseId: bicepCurl.id,
-          muscleId: forearms.id,
+          muscleId: brachioradialis.id,
         },
       ],
     }),
@@ -470,11 +470,11 @@ async function main() {
       data: [
         {
           exerciseId: hammerCurl.id,
-          muscleId: biceps.id,
+          muscleId: bicepsBrachi.id,
         },
         {
           exerciseId: hammerCurl.id,
-          muscleId: forearms.id,
+          muscleId: brachioradialis.id,
         },
       ],
     }),
@@ -488,11 +488,11 @@ async function main() {
       data: [
         {
           exerciseId: ezBarCurl.id,
-          muscleId: biceps.id,
+          muscleId: bicepsBrachi.id,
         },
         {
           exerciseId: ezBarCurl.id,
-          muscleId: forearms.id,
+          muscleId: brachioradialis.id,
         },
       ],
     }),
@@ -506,11 +506,11 @@ async function main() {
       data: [
         {
           exerciseId: preacherCurl.id,
-          muscleId: biceps.id,
+          muscleId: bicepsBrachi.id,
         },
         {
           exerciseId: preacherCurl.id,
-          muscleId: forearms.id,
+          muscleId: brachioradialis.id,
         },
       ],
     }),
