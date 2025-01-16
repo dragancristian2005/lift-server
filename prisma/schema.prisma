@@ -13,12 +13,12 @@ model User {
   username        String   @unique
   email           String   @unique
   password        String
-  height          Int
-  weight          Int
-  bodyFat         Int
-  goalWeight      Int      @map("goal_weight")
-  goalBodyFat     Int      @map("goal_body_fat")
-  calorieIntake   Int      @map("calorie_intake")
+  height          Int      @default(0)
+  weight          Int      @default(0)
+  bodyFat         Int      @default(0)
+  goalWeight      Int      @default(0)   @map("goal_weight")
+  goalBodyFat     Int      @default(0)   @map("goal_body_fat")
+  calorieIntake   Int      @default(0)   @map("calorie_intake")
   
   workouts        Workout[]
   @@map("users")
