@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { endOfWeek, startOfWeek } from 'date-fns';
+import { convertKeysToCamelCase } from '../utils/camelCase.util';
 
 @Injectable()
 export class WorkoutsService {
@@ -80,6 +81,6 @@ export class WorkoutsService {
         }
       });
     }
-    return muscle_heatmap;
+    return convertKeysToCamelCase(muscle_heatmap);
   }
 }
