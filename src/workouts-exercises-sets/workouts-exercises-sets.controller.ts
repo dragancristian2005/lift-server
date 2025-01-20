@@ -19,6 +19,13 @@ export class WorkoutsExercisesSetsController {
   }
 
   @Get(':id')
+  getWorkoutsExercisesSetsIds(@Param('id') workoutsExercisesSetsId: string) {
+    return this.workoutsExercisesSetsService.getWorkoutsExercisesSetsIds(
+      workoutsExercisesSetsId,
+    );
+  }
+
+  @Get(':id')
   getOneWorkoutsExercisesSets(@Param('id') workoutsExercisesSets: string) {
     return this.workoutsExercisesSetsService.getOneWorkoutsExercisesSets(
       workoutsExercisesSets,

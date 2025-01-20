@@ -83,4 +83,8 @@ export class WorkoutsService {
     }
     return convertKeysToCamelCase(muscle_heatmap);
   }
+
+  async getUserWorkouts(userId: string) {
+    return this.prismaService.workout.findMany({ where: { userId } });
+  }
 }

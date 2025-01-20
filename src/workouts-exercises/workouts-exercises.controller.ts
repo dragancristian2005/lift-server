@@ -18,6 +18,20 @@ export class WorkoutsExercisesController {
     );
   }
 
+  @Get('workout-id/:id')
+  getWorkoutExercisesIdsByWorkoutId(@Param('id') workoutId: string) {
+    return this.workoutsExercisesService.getWorkoutExercisesIdsByWorkoutId(
+      workoutId,
+    );
+  }
+
+  @Get('exercise-id/:id')
+  getWorkoutExercisesIdsByExerciseId(@Param('id') exerciseId: string) {
+    return this.workoutsExercisesService.getWorkoutExercisesIdsByExerciseId(
+      exerciseId,
+    );
+  }
+
   @Get(':id')
   getOneWorkoutsExercises(@Param('id') workoutsExercisesId: string) {
     return this.workoutsExercisesService.getOneWorkoutsExercises(

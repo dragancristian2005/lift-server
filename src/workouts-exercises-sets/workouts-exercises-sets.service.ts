@@ -20,4 +20,10 @@ export class WorkoutsExercisesSetsService {
       where: { id: workoutsExercisesSetsId },
     });
   }
+
+  async getWorkoutsExercisesSetsIds(workoutsExercisesSetsId: string) {
+    return this.prismaService.workoutExerciseSet.findMany({
+      where: { workoutExerciseId: workoutsExercisesSetsId },
+    });
+  }
 }

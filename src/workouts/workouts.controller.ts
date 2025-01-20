@@ -15,6 +15,11 @@ export class WorkoutsController {
     return this.workoutsService.getWeeklyProgress(req.user.sub);
   }
 
+  @Get('user-workouts')
+  getUserWorkouts(@Request() req) {
+    return this.workoutsService.getUserWorkouts(req.user.sub);
+  }
+
   @Get(':id')
   getOneWorkout(@Param('id') workoutId: string) {
     return this.workoutsService.getOneWorkout(workoutId);
