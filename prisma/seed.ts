@@ -42,6 +42,7 @@ async function main() {
       id: 'cm5p64zjl000008jy91fygcph',
       name: 'Chest Killer',
       date: new Date(),
+      finished: new Date(),
       userId: cristi.id,
     },
   });
@@ -53,6 +54,7 @@ async function main() {
       id: 'cm5s9w7nw000008jy1nng72ko',
       name: 'Bicep Killer',
       date: new Date(),
+      finished: new Date(),
       userId: damian.id,
     },
   });
@@ -64,6 +66,7 @@ async function main() {
       id: 'cm5y3od9m000008med5jt2e8j',
       name: 'Triceps Killer',
       date: new Date(),
+      finished: new Date(),
       userId: cristi.id,
     },
   });

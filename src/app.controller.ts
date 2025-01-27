@@ -1,6 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
-import { MusclesService } from './muscles/muscles.service';
-import { Public } from './decorators/public.decorator';
+import { Controller } from '@nestjs/common';
 
 @Controller()
 export class AppController {}

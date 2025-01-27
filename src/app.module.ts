@@ -8,6 +8,10 @@ import { ExercisesMusclesModule } from './exercises_muscles/exercises_muscles.mo
 import { WorkoutsModule } from './workouts/workouts.module';
 import { WorkoutsExercisesModule } from './workouts-exercises/workouts-exercises.module';
 import { WorkoutsExercisesSetsModule } from './workouts-exercises-sets/workouts-exercises-sets.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { AppService } from './app.service';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -19,7 +23,13 @@ import { WorkoutsExercisesSetsModule } from './workouts-exercises-sets/workouts-
     WorkoutsModule,
     WorkoutsExercisesModule,
     WorkoutsExercisesSetsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/public',
+    }),
+    FilesModule,
   ],
   controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

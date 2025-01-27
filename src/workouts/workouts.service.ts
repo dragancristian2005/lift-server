@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { endOfWeek, startOfWeek } from 'date-fns';
-import { convertKeysToCamelCase } from '../utils/camelCase.util';
+import { camelCase, uniq } from 'lodash';
 
 @Injectable()
 export class WorkoutsService {
@@ -33,58 +33,73 @@ export class WorkoutsService {
           lte: endWeek,
         },
       },
+      include: {
+        workoutExercise: {
+          include: {
+            exercise: {
+              include: {
+                exerciseMuscle: {
+                  include: {
+                    muscle: {
+                      select: {
+                        name: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
-    let muscle_heatmap = {};
-
-    for (const workout of workouts) {
-      let workoutsExercisesIds = [];
-
-      const workoutsExercises =
-        await this.prismaService.workoutExercise.findMany({
-          where: { workoutId: workout.id },
-        });
-      workoutsExercises.forEach((exercise) => {
-        workoutsExercisesIds.push(exercise.exerciseId);
-      });
-      const exercises = [];
-      for (const workoutsExerciseId of workoutsExercisesIds) {
-        const exercise = await this.prismaService.exercise.findMany({
-          where: { id: workoutsExerciseId },
-        });
-        exercise.forEach((ex) => exercises.push(ex));
-      }
-
-      let musclesIds = [];
-      for (const exercise of exercises) {
-        const muscleIdList = await this.prismaService.exerciseMuscle.findMany({
-          where: { exerciseId: exercise.id },
-        });
-        muscleIdList.forEach((muscleId) => {
-          if (!musclesIds.some((mId) => mId.muscleId === muscleId.muscleId))
-            musclesIds.push(muscleId);
-        });
-      }
-
-      let muscles = [];
-      for (const muscleId of musclesIds) {
-        const muscleList = await this.prismaService.muscle.findMany({
-          where: { id: muscleId.muscleId },
-        });
-        muscleList.forEach((muscle) => muscles.push(muscle));
-      }
-      muscles.forEach((muscle) => {
-        if (muscle_heatmap[muscle.name]) {
-          muscle_heatmap[muscle.name]++;
-        } else {
-          muscle_heatmap[muscle.name] = 1;
-        }
-      });
-    }
-    return convertKeysToCamelCase(muscle_heatmap);
+    return workouts
+      .map((workout) => workout.workoutExercise)
+      .flatMap((workoutExercise) =>
+        uniq(
+          workoutExercise
+            .flatMap((we) => we.exercise.exerciseMuscle)
+            .map((exerciseMuscle) => exerciseMuscle.muscle.name),
+        ),
+      )
+      .reduce(
+        (acc, cur) => ({
+          ...acc,
+          [camelCase(cur)]: Math.min(
+            acc[camelCase(cur)] ? acc[camelCase(cur)] + 1 : 1,
+            2,
+          ),
+        }),
+        {},
+      );
   }
 
-  async getUserWorkouts(userId: string) {
-    return this.prismaService.workout.findMany({ where: { userId } });
+  async getUserWorkouts(userId: string, limit: number, page: number) {
+    const skip = (page - 1) * limit;
+    const take = limit;
+
+    return this.prismaService.workout.findMany({
+      skip,
+      take,
+      where: { userId },
+      include: {
+        workoutExercise: {
+          include: {
+            exercise: {
+              select: {
+                name: true,
+              },
+            },
+            workoutExerciseSet: {
+              select: {
+                reps: true,
+                weight: true,
+              },
+            },
+          },
+        },
+      },
+    });
   }
 }

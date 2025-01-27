@@ -16,8 +16,16 @@ export class WorkoutsController {
   }
 
   @Get('user-workouts')
-  getUserWorkouts(@Request() req) {
-    return this.workoutsService.getUserWorkouts(req.user.sub);
+  getUserWorkouts(
+    @Request() req,
+    @Query('limit') limit: number,
+    @Query('page') page: number,
+  ) {
+    return this.workoutsService.getUserWorkouts(
+      req.user.sub,
+      Number(limit),
+      Number(page),
+    );
   }
 
   @Get(':id')

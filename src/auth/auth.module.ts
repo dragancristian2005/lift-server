@@ -6,6 +6,8 @@ import { AuthController } from './auth.controller';
 import { jwtConstants } from './constants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
+import { FilesModule } from '../files/files.module';
+import { FilesService } from '../files/files.service';
 
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import { AuthGuard } from './auth.guard';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '24h' },
     }),
+    FilesModule,
   ],
   providers: [
     AuthService,
@@ -22,6 +25,7 @@ import { AuthGuard } from './auth.guard';
       provide: APP_GUARD,
       useClass: AuthGuard,
     },
+    FilesService,
   ],
   controllers: [AuthController],
   exports: [AuthService],

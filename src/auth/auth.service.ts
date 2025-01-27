@@ -7,6 +7,7 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { createHash } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
+import { FilesService } from '../files/files.service';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +15,7 @@ export class AuthService {
     private usersService: UsersService,
     private jwtService: JwtService,
     private prismaService: PrismaService,
+    private filesService: FilesService,
   ) {}
 
   async signIn(
@@ -68,5 +70,20 @@ export class AuthService {
 
   async getProfile(userId: string) {
     return this.usersService.findOne({ id: userId });
+  }
+
+  async updateProfilePicture(userId: string, file: Express.Multer.File) {
+    const user = await this.usersService.findOne({ id: userId });
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    const fileRecord = await this.filesService.createFile(file, userId);
+
+    await this.prismaService.user.update({
+      where: { id: userId },
+      data: { avatarId: fileRecord.id },
+    });
+
+    return fileRecord;
   }
 }

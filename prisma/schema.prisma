@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["omitApi"]
 }
 
@@ -9,90 +9,107 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(cuid())
-  username        String   @unique
-  email           String   @unique
-  password        String
-  height          Int      @default(0)
-  weight          Int      @default(0)
-  bodyFat         Int      @default(0)
-  goalWeight      Int      @default(0)   @map("goal_weight")
-  goalBodyFat     Int      @default(0)   @map("goal_body_fat")
-  calorieIntake   Int      @default(0)   @map("calorie_intake")
-  
-  workouts        Workout[]
+  id               String @id @default(cuid())
+  username         String @unique
+  email            String @unique
+  password         String
+  avatar           File?   @relation(fields: [avatarId], references: [id])
+  avatarId         String? @map("profile_picture_id")   @unique
+  height           Int    @default(0)
+  weight           Int    @default(0)
+  bodyFat          Int    @default(0)
+  goalWeight       Int    @default(0) @map("goal_weight")
+  goalBodyFat      Int    @default(0) @map("goal_body_fat")
+  calorieIntake    Int    @default(0) @map("calorie_intake")
+
+  workouts Workout[]
+
   @@map("users")
 }
 
+model File {
+  id           String  @id @default(cuid())
+  originalName String
+  blurHash     String?
+  filePath     String
+  user         User?
+
+  @@map("files")
+}
+
 model Workout {
-  id            String     @id @default(cuid())
-  name          String
-  date          DateTime
+  id       String   @id @default(cuid())
+  name     String
+  date     DateTime
+  finished DateTime
 
-  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String     @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 
-  workoutExercise      WorkoutExercise[]
+  workoutExercise WorkoutExercise[]
+
   @@map("workouts")
 }
 
 model WorkoutExercise {
-  id                String      @id @default(cuid())
+  id String @id @default(cuid())
 
-  workout           Workout     @relation(fields: [workoutId], references: [id], onDelete: Cascade)
-  workoutId         String      @map("workout_id")
+  workout   Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  workoutId String  @map("workout_id")
 
-  exercise          Exercise?    @relation(fields: [exerciseId], references: [id], onDelete: SetNull)
-  exerciseId        String?      @map("exercise_id")
+  exercise   Exercise? @relation(fields: [exerciseId], references: [id], onDelete: SetNull)
+  exerciseId String?   @map("exercise_id")
 
   workoutExerciseSet WorkoutExerciseSet[]
+
   @@map("workouts_exercises")
 }
 
 model WorkoutExerciseSet {
-  id                String      @id @default(cuid())
-  reps              Int
-  weight            Int
+  id     String @id @default(cuid())
+  reps   Int
+  weight Int
 
   workoutExercise   WorkoutExercise @relation(fields: [workoutExerciseId], references: [id], onDelete: Cascade)
-  workoutExerciseId String   @map("workout_exercise_id")
-  
+  workoutExerciseId String          @map("workout_exercise_id")
+
   @@map("workouts_exercises_sets")
 }
 
 model Exercise {
-  id                  String   @id @default(cuid())
-  name                String
-  image               String
-  difficulty          String
-  demonstrationGif    String   @map("demonstration_gif")
-  description         String
-  type                String
+  id               String @id @default(cuid())
+  name             String
+  image            String
+  difficulty       String
+  demonstrationGif String @map("demonstration_gif")
+  description      String
+  type             String
 
-  workoutExercise     WorkoutExercise[]
+  workoutExercise WorkoutExercise[]
 
-  exerciseMuscle      ExerciseMuscle[]
+  exerciseMuscle ExerciseMuscle[]
+
   @@map("exercises")
 }
 
 model ExerciseMuscle {
-  exercise        Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
-  exerciseId      String   @map("exercise_id")
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exerciseId String   @map("exercise_id")
 
-  muscle          Muscle   @relation(fields: [muscleId], references: [id], onDelete: Cascade)
-  muscleId        String   @map("muscle_id")
+  muscle   Muscle @relation(fields: [muscleId], references: [id], onDelete: Cascade)
+  muscleId String @map("muscle_id")
 
   @@id([exerciseId, muscleId])
   @@map("exercises_muscles")
 }
 
 model Muscle {
-  id                String      @id @default(cuid())
-  name              String
-  muscleImg         String      @map("muscle_img")
-  information       String
+  id          String @id @default(cuid())
+  name        String
+  muscleImg   String @map("muscle_img")
+  information String
 
-  exerciseMuscle    ExerciseMuscle[]
+  exerciseMuscle ExerciseMuscle[]
+
   @@map("muscles")
 }
-
