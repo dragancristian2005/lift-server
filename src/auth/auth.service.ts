@@ -78,12 +78,10 @@ export class AuthService {
       throw new BadRequestException('User not found');
     }
     const fileRecord = await this.filesService.createFile(file, userId);
-
     await this.prismaService.user.update({
       where: { id: userId },
       data: { avatarId: fileRecord.id },
     });
-
     return fileRecord;
   }
 }

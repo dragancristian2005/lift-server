@@ -1,5 +1,14 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Request,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
+import { UpdateUserInfoDto } from './dto/update-user-info';
 
 @Controller('users')
 export class UsersController {
@@ -8,6 +17,11 @@ export class UsersController {
   @Get()
   getAllUsers(@Query('page') page: number, @Query('limit') limit: number) {
     return this.usersService.getAllUsers(Number(page), Number(limit));
+  }
+
+  @Post('user-info')
+  updateUserInfo(@Request() req, @Body() updateUserInfoDto: UpdateUserInfoDto) {
+    return this.usersService.updateUserInfo(req.user.sub, updateUserInfoDto);
   }
 
   @Get(':id')

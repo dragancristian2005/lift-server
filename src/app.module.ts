@@ -24,8 +24,8 @@ import { FilesModule } from './files/files.module';
     WorkoutsExercisesModule,
     WorkoutsExercisesSetsModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
-      serveRoot: '/public',
+      rootPath: join(process.cwd(), 'public'),
+      serveRoot: '/',
     }),
     FilesModule,
   ],

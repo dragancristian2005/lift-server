@@ -33,7 +33,7 @@ export class FilesService {
       data: {
         originalName: file.originalname,
         blurHash,
-        filePath: `/public/${fileName}`,
+        filePath: `${fileName}`,
         user: { connect: { id: userId } },
       },
     });

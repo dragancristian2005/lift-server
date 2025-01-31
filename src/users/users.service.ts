@@ -9,6 +9,7 @@ export class UsersService {
   async findOne(userWhere: Prisma.UserWhereUniqueInput) {
     return this.prismaService.user.findUnique({
       where: userWhere,
+      include: { avatar: { select: { filePath: true } } },
     });
   }
 
@@ -24,5 +25,15 @@ export class UsersService {
 
   async getOneUser(userId: string) {
     return this.prismaService.user.findUnique({ where: { id: userId } });
+  }
+
+  async updateUserInfo(
+    userId: string,
+    updateUserInfoDto: Prisma.UserUpdateInput,
+  ) {
+    return this.prismaService.user.update({
+      where: { id: userId },
+      data: updateUserInfoDto,
+    });
   }
 }
