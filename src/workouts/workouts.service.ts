@@ -18,7 +18,17 @@ export class WorkoutsService {
   }
 
   async getOneWorkout(workoutId: string) {
-    return this.prismaService.workout.findUnique({ where: { id: workoutId } });
+    return this.prismaService.workout.findUnique({
+      where: { id: workoutId },
+      include: {
+        workoutExercise: {
+          select: {
+            exercise: true,
+            workoutExerciseSet: { select: { reps: true, weight: true } },
+          },
+        },
+      },
+    });
   }
 
   async getWeeklyProgress(userId: string) {

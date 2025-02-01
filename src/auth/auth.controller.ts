@@ -47,10 +47,7 @@ export class AuthController {
     @Request() req,
     @UploadedFile(
       new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 100000000 }),
-          new FileTypeValidator({ fileType: 'image/jpeg' }),
-        ],
+        validators: [new MaxFileSizeValidator({ maxSize: 100000000 })],
       }),
     )
     file: Express.Multer.File,
