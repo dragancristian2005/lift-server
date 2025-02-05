@@ -39,12 +39,20 @@ export class WorkoutsController {
 
   @Post('create-workout')
   createNewWorkout(
-    @Body() body: { workoutExercises: WorkoutTypes; workoutName: string },
+    @Body()
+    body: {
+      workoutExercises: WorkoutTypes;
+      workoutName: string;
+      endTime: Date;
+      startTime: Date;
+    },
     @Request() res,
   ) {
     return this.workoutsService.createNewWorkout(
       body.workoutExercises,
       body.workoutName,
+      body.startTime,
+      body.endTime,
       res.user.sub,
     );
   }

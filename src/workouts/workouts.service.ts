@@ -120,14 +120,16 @@ export class WorkoutsService {
   async createNewWorkout(
     workoutExercises: WorkoutTypes,
     workoutName: string,
+    startTime: Date,
+    endTime: Date,
     userId: string,
   ) {
     return this.prismaService.workout.create({
       data: {
         id: createId(),
         name: workoutName,
-        date: new Date(),
-        finished: new Date(),
+        date: new Date(startTime),
+        finished: new Date(endTime),
         user: {
           connect: {
             id: userId,
