@@ -1,5 +1,14 @@
-import { Controller, Get, Param, Query, Request } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Request,
+} from '@nestjs/common';
 import { WorkoutsService } from './workouts.service';
+import { WorkoutTypes } from '../utils/types/workout.types';
 
 @Controller('workouts')
 export class WorkoutsController {
@@ -25,6 +34,18 @@ export class WorkoutsController {
       req.user.sub,
       Number(limit),
       Number(page),
+    );
+  }
+
+  @Post('create-workout')
+  createNewWorkout(
+    @Body() body: { workoutExercises: WorkoutTypes; workoutName: string },
+    @Request() res,
+  ) {
+    return this.workoutsService.createNewWorkout(
+      body.workoutExercises,
+      body.workoutName,
+      res.user.sub,
     );
   }
 

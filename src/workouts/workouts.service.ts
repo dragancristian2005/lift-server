@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { endOfWeek, startOfWeek } from 'date-fns';
 import { camelCase, uniq } from 'lodash';
+import { WorkoutTypes } from '../utils/types/workout.types';
+import { createId } from '@paralleldrive/cuid2';
 
 @Injectable()
 export class WorkoutsService {
@@ -24,7 +26,9 @@ export class WorkoutsService {
         workoutExercise: {
           select: {
             exercise: true,
-            workoutExerciseSet: { select: { reps: true, weight: true } },
+            workoutExerciseSet: {
+              select: { reps: true, weight: true },
+            },
           },
         },
       },
@@ -107,6 +111,51 @@ export class WorkoutsService {
                 weight: true,
               },
             },
+          },
+        },
+      },
+    });
+  }
+
+  async createNewWorkout(
+    workoutExercises: WorkoutTypes,
+    workoutName: string,
+    userId: string,
+  ) {
+    return this.prismaService.workout.create({
+      data: {
+        id: createId(),
+        name: workoutName,
+        date: new Date(),
+        finished: new Date(),
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+        workoutExercise: {
+          create: workoutExercises.map((exercise) => ({
+            id: createId(),
+            exercise: {
+              connect: {
+                id: exercise.id,
+              },
+            },
+            workoutExerciseSet: {
+              create: exercise.sets.map((set) => ({
+                id: createId(),
+                reps: set.reps,
+                weight: set.weight,
+              })),
+            },
+          })),
+        },
+      },
+      include: {
+        workoutExercise: {
+          include: {
+            workout: true,
+            exercise: true,
           },
         },
       },

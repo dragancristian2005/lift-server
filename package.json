@@ -29,6 +29,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/serve-static": "^4.0.2",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^6.2.0",
     "blurhash": "^2.0.5",
     "class-transformer": "^0.5.1",
