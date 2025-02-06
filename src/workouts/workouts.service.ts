@@ -136,21 +136,25 @@ export class WorkoutsService {
           },
         },
         workoutExercise: {
-          create: workoutExercises.map((exercise) => ({
-            id: createId(),
-            exercise: {
-              connect: {
-                id: exercise.id,
+          create: workoutExercises
+            .filter((exercise) => exercise.sets.length !== 0)
+            .map((exercise) => ({
+              id: createId(),
+              exercise: {
+                connect: {
+                  id: exercise.id,
+                },
               },
-            },
-            workoutExerciseSet: {
-              create: exercise.sets.map((set) => ({
-                id: createId(),
-                reps: set.reps,
-                weight: set.weight,
-              })),
-            },
-          })),
+              workoutExerciseSet: {
+                create: exercise.sets
+                  .filter((set) => set.weight !== 0 && set.reps !== 0)
+                  .map((set) => ({
+                    id: createId(),
+                    reps: set.reps,
+                    weight: set.weight,
+                  })),
+              },
+            })),
         },
       },
       include: {
