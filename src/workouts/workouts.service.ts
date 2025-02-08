@@ -167,4 +167,15 @@ export class WorkoutsService {
       },
     });
   }
+
+  async getLatestWorkout(userId: string) {
+    return this.prismaService.workout.findFirst({
+      where: {
+        userId,
+      },
+      orderBy: {
+        date: 'desc',
+      },
+    });
+  }
 }

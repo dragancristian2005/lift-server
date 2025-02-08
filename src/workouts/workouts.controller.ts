@@ -37,6 +37,11 @@ export class WorkoutsController {
     );
   }
 
+  @Get('latest-workout')
+  getLatestWorkout(@Request() req) {
+    return this.workoutsService.getLatestWorkout(req.user.sub);
+  }
+
   @Post('create-workout')
   createNewWorkout(
     @Body()
