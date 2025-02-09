@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { endOfWeek, startOfWeek } from 'date-fns';
+import { startOfWeek, endOfWeek, eachDayOfInterval, format } from 'date-fns';
 import { camelCase, uniq } from 'lodash';
 import { WorkoutTypes } from '../utils/types/workout.types';
 import { createId } from '@paralleldrive/cuid2';
@@ -177,5 +177,43 @@ export class WorkoutsService {
         date: 'desc',
       },
     });
+  }
+
+  async getWeekStreak(userId: string) {
+    const startDate = startOfWeek(new Date(), { weekStartsOn: 1 });
+    const endDate = endOfWeek(new Date(), { weekStartsOn: 1 });
+
+    const workouts = await this.prismaService.workout.findMany({
+      where: {
+        userId,
+        date: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+      select: {
+        date: true,
+      },
+    });
+
+    const weekStreak: Record<string, boolean> = {
+      Mon: false,
+      Tue: false,
+      Wed: false,
+      Thu: false,
+      Fri: false,
+      Sat: false,
+      Sun: false,
+    };
+
+    workouts.forEach((workout) => {
+      const dayName = format(workout.date, 'EEE');
+      const formattedDay = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+      if (weekStreak[formattedDay] !== undefined) {
+        weekStreak[formattedDay] = true;
+      }
+    });
+
+    return weekStreak;
   }
 }

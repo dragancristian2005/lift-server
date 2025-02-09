@@ -42,6 +42,11 @@ export class WorkoutsController {
     return this.workoutsService.getLatestWorkout(req.user.sub);
   }
 
+  @Get('week-streak')
+  getWeekStreak(@Request() req) {
+    return this.workoutsService.getWeekStreak(req.user.sub);
+  }
+
   @Post('create-workout')
   createNewWorkout(
     @Body()
