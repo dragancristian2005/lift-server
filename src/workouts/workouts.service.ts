@@ -114,6 +114,9 @@ export class WorkoutsService {
           },
         },
       },
+      orderBy: {
+        date: 'desc',
+      },
     });
   }
 
