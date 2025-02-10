@@ -219,4 +219,10 @@ export class WorkoutsService {
 
     return weekStreak;
   }
+
+  async deleteOneWorkout(workoutId: string) {
+    return this.prismaService.workout.delete({
+      where: { id: workoutId },
+    });
+  }
 }

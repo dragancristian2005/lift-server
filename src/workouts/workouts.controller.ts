@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -65,6 +66,11 @@ export class WorkoutsController {
       body.endTime,
       res.user.sub,
     );
+  }
+
+  @Delete('delete-workout/:id')
+  deleteOneWorkout(@Param('id') workoutId: string) {
+    return this.workoutsService.deleteOneWorkout(workoutId);
   }
 
   @Get(':id')
