@@ -36,15 +36,15 @@ export class WorkoutsService {
   }
 
   async getWeeklyProgress(userId: string) {
-    const startWeek = startOfWeek(new Date());
-    const endWeek = endOfWeek(new Date());
+    const startDate = startOfWeek(new Date(), { weekStartsOn: 1 });
+    const endDate = endOfWeek(new Date(), { weekStartsOn: 1 });
 
     const workouts = await this.prismaService.workout.findMany({
       where: {
         userId: userId,
         date: {
-          gte: startWeek,
-          lte: endWeek,
+          gte: startDate,
+          lte: endDate,
         },
       },
       include: {
