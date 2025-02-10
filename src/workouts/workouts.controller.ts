@@ -73,6 +73,11 @@ export class WorkoutsController {
     return this.workoutsService.deleteOneWorkout(workoutId);
   }
 
+  @Delete('clear-workouts')
+  clearWorkouts(@Request() res) {
+    return this.workoutsService.clearWorkouts(res.user.sub);
+  }
+
   @Get(':id')
   getOneWorkout(@Param('id') workoutId: string) {
     return this.workoutsService.getOneWorkout(workoutId);

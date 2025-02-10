@@ -225,4 +225,10 @@ export class WorkoutsService {
       where: { id: workoutId },
     });
   }
+
+  async clearWorkouts(userId: string) {
+    return this.prismaService.workout.deleteMany({
+      where: { userId },
+    });
+  }
 }
